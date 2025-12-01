@@ -183,9 +183,9 @@ class MainWindow(QMainWindow):
         if not os.path.exists(immediate_term_path):
             with open(immediate_term_path, 'w') as file:
                 file.write(username)
-            logging.info('Created file ' + immediate_term_path + ' account will be disabled shortly.')
+            logging.info('Created file ' + immediate_term_path + ', the account will be disabled shortly.')
         else:
-            logging.warning('File ' + immediate_term_path + ' already exists. Please wait for the account to be disabled.')
+            logging.warning('File ' + immediate_term_path + ' already exists. The account should be disabled within a minute. Check the term list for duplicate entries.')
     
 app = QApplication(sys.argv)
 
