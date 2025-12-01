@@ -20,22 +20,27 @@ class MainWindow(QMainWindow):
         self.first_name_label = QLabel('First Name:')
         self.first_name_text_box = QLineEdit()
         self.first_name_text_box.setFixedWidth(text_box_width)
+        self.first_name_text_box.textChanged.connect(self.check_fields_filled)
 
         self.last_name_label = QLabel('Last Name:')
         self.last_name_text_box = QLineEdit()
         self.last_name_text_box.setMaximumWidth(text_box_width)
+        self.last_name_text_box.textChanged.connect(self.check_fields_filled)
 
         self.username_label = QLabel('Username:')
         self.username_text_box = QLineEdit()
         self.username_text_box.setFixedWidth(text_box_width)
+        self.username_text_box.textChanged.connect(self.check_fields_filled)       
 
         self.manager_email_label = QLabel('Manager Email:')
         self.manager_email_text_box = QLineEdit()
         self.manager_email_text_box.setFixedWidth(text_box_width)
+        self.manager_email_text_box.textChanged.connect(self.check_fields_filled)
 
         self.hr_email_label = QLabel('HR Email:')
         self.hr_email_text_box = QLineEdit()
         self.hr_email_text_box.setFixedWidth(text_box_width)
+        self.hr_email_text_box.textChanged.connect(self.check_fields_filled)
 
         self.term_date_label = QLabel('Term Date:')
         self.term_date_calendar = QCalendarWidget()
@@ -46,6 +51,7 @@ class MainWindow(QMainWindow):
 
         self.add_to_term_list_button = QPushButton('Add to Term List')
         self.add_to_term_list_button.setFixedWidth(button_width)
+        self.add_to_term_list_button.setEnabled(False)
 
         self.open_term_list_button = QPushButton('Open Term List')
         self.open_term_list_button.setFixedWidth(button_width)
@@ -97,7 +103,24 @@ class MainWindow(QMainWindow):
         container.setLayout(layout)
 
         self.setCentralWidget(container)
+    
+    def check_fields_filled(self):
+        first_name_text = str(self.first_name_text_box.text())
+        last_name_text = str(self.last_name_text_box.text())
+        username_text = str(self.username_text_box.text())
+        manager_email_text = str(self.manager_email_text_box.text())
+        hr_email_text = str(self.hr_email_text_box.text())
 
+        if first_name_text == '' \
+            or last_name_text == '' \
+            or username_text == '' \
+            or manager_email_text == '' \
+            or hr_email_text == '':
+            self.add_to_term_list_button.setEnabled(False)
+        else:
+            self.add_to_term_list_button.setEnabled(True)
+
+    
 app = QApplication(sys.argv)
 
 window = MainWindow()
