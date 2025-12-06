@@ -176,7 +176,7 @@ class MainWindow(QMainWindow):
         logging.info('Begining update of ' + term_list_csv)
 
     def disable_immediately(self, username):
-        immediate_term_path = 'C:\\Users\\KVoelker\\' + username
+        immediate_term_path = 'C:\\Users\\KVoelker\\repos\\immediate_account_disablement\\' + username
 
         logging.info('Immediate termination requested, creating file that will trigger immediate account disablement.')
 
