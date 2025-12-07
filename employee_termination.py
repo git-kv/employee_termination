@@ -5,7 +5,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QLabel, QMainWindow, QTextEdit, QVBoxLayout, QWidget, QLineEdit, QPushButton, QSpacerItem, QCalendarWidget, QCheckBox, QMessageBox
 
 today = datetime.today().strftime('%Y-%m-%d')
-log_path = 'C:\\Users\\KVoelker\\repos\\logs\\add_to_term_list_' + today + '.log'
+log_path = 'C:\\Users\\KVoelker\\repos\\logs\\employee_termination_' + today + '.log'
 logging.basicConfig(filename=log_path, level=logging.DEBUG, format=' %(asctime)s - %(levelname)s - %(message)s')
 
 class MainWindow(QMainWindow):
@@ -19,7 +19,7 @@ class MainWindow(QMainWindow):
         calendar_width = 260
         button_width = 260
 
-        self.setWindowTitle("Add to Term List")
+        self.setWindowTitle("Employee Termination")
 
         # Create widgets for labels and text input fields
         self.first_name_label = QLabel('First Name:')
@@ -54,7 +54,7 @@ class MainWindow(QMainWindow):
         self.immediate_term_label = QLabel('Immediate Termination:')
         self.immediate_term_check_box = QCheckBox()
 
-        self.add_to_term_list_button = QPushButton('Add to Term List')
+        self.add_to_term_list_button = QPushButton('Begin Termination Process')
         self.add_to_term_list_button.setFixedWidth(button_width)
         self.add_to_term_list_button.setEnabled(False)
         self.add_to_term_list_button.clicked.connect(self.add_to_term_list)
