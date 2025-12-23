@@ -1,7 +1,7 @@
 import os, sys, logging
 
 from datetime import datetime
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, QCoreApplication
 from PyQt6.QtWidgets import QApplication, QLabel, QMainWindow, QTextEdit, QVBoxLayout, QWidget, QLineEdit, QPushButton, QSpacerItem, QCalendarWidget, QCheckBox, QMessageBox
 
 today = datetime.today().strftime('%Y-%m-%d')
@@ -148,13 +148,19 @@ class MainWindow(QMainWindow):
                             hr_email_text,
                             term_date)
         except:
-            logging.exception('Failed to update CSV')
+            error_description = 'Failed to update CSV'
+            logging.exception(error_description)
+            self.show_error_message(error_description)
+            QCoreApplication.exit()
 
         if (immediate_checked):
             try:
                 self.disable_immediately(username_text)
             except:
-                logging.exception('Failed to create immediate disablement file')
+                error_description = 'Failed to create immediate disablement file'
+                logging.exception(error_description)
+                self.show_error_message(error_description)
+                QCoreApplication.exit()
 
         # Popup notifiying what was submitted and where to find logs.
         message_box = QMessageBox()
@@ -195,6 +201,12 @@ class MainWindow(QMainWindow):
             logging.info('Created file ' + immediate_term_path + ', the account will be disabled shortly.')
         else:
             logging.warning('File ' + immediate_term_path + ' already exists. The account should be disabled within a minute. Check the term list for duplicate entries.')
+
+    def show_error_message(self, message):
+        error_message_box = QMessageBox()
+        error_message_box.setWindowTitle('Error')
+        error_message_box.setText(message)
+        error_message_box.exec()
     
 app = QApplication(sys.argv)
 
