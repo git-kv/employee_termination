@@ -139,13 +139,16 @@ class MainWindow(QMainWindow):
 
         current_user = os.environ.get('USER') or os.environ.get('USERNAME')
         logging.info('The following information was submitted by ' + current_user + " to disable " + first_name_text + "'s account")
-
-        self.update_csv(first_name_text,
-                        last_name_text,
-                        username_text,
-                        manager_email_text,
-                        hr_email_text,
-                        term_date)
+        
+        try:
+            self.update_csv(first_name_text,
+                            last_name_text,
+                            username_text,
+                            manager_email_text,
+                            hr_email_text,
+                            term_date)
+        except:
+            self.show_error('Failed to update CSV')
 
         if (immediate_checked):
             self.disable_immediately(username_text)
@@ -190,6 +193,11 @@ class MainWindow(QMainWindow):
         else:
             logging.warning('File ' + immediate_term_path + ' already exists. The account should be disabled within a minute. Check the term list for duplicate entries.')
     
+    def show_error(message):
+        error_box = QMessageBox()
+        error_box.setWindowTitle('Error')
+        error_box.setText(message)
+
 app = QApplication(sys.argv)
 
 window = MainWindow()
