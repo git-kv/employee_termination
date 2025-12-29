@@ -200,14 +200,14 @@ class MainWindow(QMainWindow):
         logging.info('Final email notification warning date: ' + final_warning_date)
         logging.info('Deletion date: ' + deletion_date)
 
-        term_list_csv = '\\\\file\\path\\of\\csv\\term_list.csv'
+        term_list_csv = 'C:\\Users\\KVoelker\\repos\\term_list\\term_list.csv'
         logging.info('Begining update of ' + term_list_csv)
 
-        new_data = [first_name, last_name, username, manager, hr, term_date]
+        new_data = [(first_name + " " + last_name), first_name, username, manager, hr, term_date, second_notification_date, final_warning_date, deletion_date, convert_to_shared_date]
 
-        #with open(term_list_csv, 'a', newline='') as file:
-        #    writer = csv.writer(file)
-        #    writer.writerow(new_data)
+        with open(term_list_csv, 'a', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(new_data)
 
     def disable_immediately(self, username):
         immediate_term_path = 'C:\\Users\\KVoelker\\repos\\immediate_account_disablement\\' + username
