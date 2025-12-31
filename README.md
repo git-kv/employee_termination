@@ -9,7 +9,11 @@ The immediate termination and scheduled termination processes are configured to 
 # How to Use
 To use this application enter the requested fields for the employee that we are separating from; first name, last name, username, their manager's email, the relevant hr employee's email, the users last day, and if the account should be disabled immediately or not.
 
+Once the information has been entered click the "Begin Termination Process" button.
+
+If the "Immediate Termination" checkbox was checked the account will be automatically disabled within a couple minutes. Other separation processes will occur at their scheduled times.
+
 Some additional notes to be aware of:
-* If it is after 3PM CST and the user account should be disabled on the same day you will need to select the following date for the term date and check the box for Immediate termination.
-* The users username should be the first 8 characters of their email address, this will come into play if their email address contains more than 8 characters before the @.
-  eg. user's email is AIhavealonglastname@dart.net their username would be AIhaveal
+* If it is after 3PM CST and the user account should be disabled on the same day you will need to select the following date for the term date and check the box for Immediate termination. If the following date is not selected the first notification alerting the user's manager that their account will be disabled will not be sent.
+
+* The users username should be the first 8 characters of their email address, this will come into play if their email address contains more than 8 characters before the @. Eg. the user's email is AIhavealonglastname@dart.net their username would be AIhaveal.
