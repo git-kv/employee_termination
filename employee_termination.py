@@ -64,6 +64,7 @@ class MainWindow(QMainWindow):
         
         self.open_readme_button = QPushButton('Open ReadMe')
         self.open_readme_button.setFixedWidth(button_width)
+        self.open_readme_button.clicked.connect(self.show_readme)
         
         # Create window layout
         layout = QVBoxLayout()
@@ -238,7 +239,13 @@ class MainWindow(QMainWindow):
             business_days_to_add -= 1
         return current_date
 
-
+    def show_readme(self):
+        readme_message_box = QMessageBox()
+        readme_message_box.setWindowTitle('ReadMe')
+        with open('\\\\eocservices\\apps$\\programs\\scripts\\separation\\readme.md') as data:
+            readme_message_text = data.read()
+        readme_message_box.setText(readme_message_text)
+        readme_message_box.exec()
 app = QApplication(sys.argv)
 
 window = MainWindow()
