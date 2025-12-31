@@ -2,7 +2,9 @@
 # immediate termination waiting to be processed.
 $root_path = "\\eocservices\apps$\programs\scripts\separation\immediate_account_disablement\"
 $smtp_server = "exnode2.dartadvantage.com"
-$from = "ImmediateTerm@dart.net"
+$from = "ImmediateTermAlerts@dart.net"
+$vip_recipients = "kvoelker@dart.net"
+$default_recipients = "kvoelker@dart.net"
 $Global:disable_account = $false
 
 while ($true) {
@@ -13,10 +15,8 @@ while ($true) {
             $user_to_be_disabled = $_.BaseName
             $vip_subject = "A separation request was submitted to immediately disable $user_to_be_disabled"
             $vip_body = "A separation request was submitted to immediately disable $user_to_be_disabled.`n`nSince this is a VIP account it will need to be disabled manually if immediate disablement is desired."
-            $vip_recipients = "kvoelker@dart.net"
             $default_subject = "Account Disabled $user_to_be_disabled"
             $default_body = "$user_to_be_disabled's account has been disabled."
-            $default_recipients = "kvoelker@dart.net"
             $disable_account = $true
 
             Get-ADPrincipalGroupMembership $user_to_be_disabled | Select-Object Name | ForEach-Object {
