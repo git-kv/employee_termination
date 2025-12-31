@@ -5,7 +5,7 @@ from PyQt6.QtCore import Qt, QCoreApplication, QDate
 from PyQt6.QtWidgets import QApplication, QLabel, QMainWindow, QTextEdit, QVBoxLayout, QWidget, QLineEdit, QPushButton, QSpacerItem, QCalendarWidget, QCheckBox, QMessageBox
 
 today = datetime.today().strftime('%Y-%m-%d')
-log_path = 'C:\\Users\\KVoelker\\repos\\logs\\employee_termination_' + today + '.log'
+log_path = '\\\\eocservices\\apps$\\programs\\scripts\\logs\\employee_termination_' + today + '.log'
 logging.basicConfig(filename=log_path, level=logging.DEBUG, format=' %(asctime)s - %(levelname)s - %(message)s')
 
 class MainWindow(QMainWindow):
@@ -200,7 +200,7 @@ class MainWindow(QMainWindow):
         logging.info('Final email notification warning date: ' + final_warning_date)
         logging.info('Deletion date: ' + deletion_date)
 
-        term_list_csv = 'C:\\Users\\KVoelker\\repos\\term_list\\term_list.csv'
+        term_list_csv = '\\\\eocservices\\apps$\\programs\\scripts\\separation\\term_list.csv'
         logging.info('Begining update of ' + term_list_csv)
 
         new_data = [(first_name + " " + last_name), first_name, username, manager, hr, term_date, second_notification_date, final_warning_date, deletion_date, convert_to_shared_date]
@@ -210,7 +210,7 @@ class MainWindow(QMainWindow):
             writer.writerow(new_data)
 
     def disable_immediately(self, username):
-        immediate_term_path = 'C:\\Users\\KVoelker\\repos\\immediate_account_disablement\\' + username
+        immediate_term_path = '\\\\eocservices\\apps$\\programs\\scripts\\separation\\immediate_account_disablement\\' + username
 
         logging.info('Immediate termination requested, creating file that will trigger immediate account disablement.')
 
