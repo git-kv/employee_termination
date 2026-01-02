@@ -139,14 +139,16 @@ class MainWindow(QMainWindow):
         term_date = self.term_date_calendar.selectedDate().toString('MM/dd/yyyy')
         tmp_date = self.term_date_calendar.selectedDate().toPyDate()
         today = datetime.today().date()
-        current_time = time(hour=datetime.hour, minute=datetime.minute, second=datetime.second)
+        now = datetime.now()
+        current_time = time(hour=now.hour, minute=now.minute, second=now.second)
         current_date_time = datetime.combine(today, current_time)
         cutoff_time = time(hour=15, minute=0, second=0)
         cutoff_date_time = datetime.combine(today, cutoff_time)
         if (tmp_date < today):
-            tmp_date = datetime.today()
-        if (tmp_date.date() == today and cutoff_date_time < current_date_time):
+            tmp_date = self.date_by_adding_business_days(today, 0)
+        if (tmp_date == today and cutoff_date_time < current_date_time):
             tmp_date = self.date_by_adding_business_days(tmp_date, 1)
+        term_date = self.date_by_adding_business_days(tmp_date, 0).strftime('%m/%d/%Y')
         convert_to_shared_date = self.date_by_adding_business_days(tmp_date, 1).strftime("%m/%d/%Y")
         second_notification_date = self.date_by_adding_business_days(tmp_date, 20).strftime('%m/%d/%Y')
         deletion_date = self.date_by_adding_business_days(tmp_date, 30).strftime('%m/%d/%Y')
