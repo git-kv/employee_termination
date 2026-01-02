@@ -1,6 +1,6 @@
 import os, sys, logging, csv
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 from PyQt6.QtCore import Qt, QCoreApplication, QDate
 from PyQt6.QtWidgets import QApplication, QLabel, QMainWindow, QTextEdit, QVBoxLayout, QWidget, QLineEdit, QPushButton, QSpacerItem, QCalendarWidget, QCheckBox, QMessageBox
 
@@ -138,6 +138,15 @@ class MainWindow(QMainWindow):
         immediate_checked = self.immediate_term_check_box.isChecked()
         term_date = self.term_date_calendar.selectedDate().toString('MM/dd/yyyy')
         tmp_date = self.term_date_calendar.selectedDate().toPyDate()
+        today = datetime.today().date()
+        current_time = time(hour=datetime.hour, minute=datetime.minute, second=datetime.second)
+        current_date_time = datetime.combine(today, current_time)
+        cutoff_time = time(hour=15, minute=0, second=0)
+        cutoff_date_time = datetime.combine(today, cutoff_time)
+        if (tmp_date < today):
+            tmp_date = datetime.today()
+        if (tmp_date.date() == today and cutoff_date_time < current_date_time):
+            tmp_date = self.date_by_adding_business_days(tmp_date, 1)
         convert_to_shared_date = self.date_by_adding_business_days(tmp_date, 1).strftime("%m/%d/%Y")
         second_notification_date = self.date_by_adding_business_days(tmp_date, 20).strftime('%m/%d/%Y')
         deletion_date = self.date_by_adding_business_days(tmp_date, 30).strftime('%m/%d/%Y')
