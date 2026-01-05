@@ -146,8 +146,10 @@ class MainWindow(QMainWindow):
         cutoff_date_time = datetime.combine(today, cutoff_time)
         if (tmp_date < today):
             tmp_date = self.date_by_adding_business_days(today, 0)
+            self.disable_immediately(username_text)
         if (tmp_date == today and cutoff_date_time < current_date_time):
             tmp_date = self.date_by_adding_business_days(tmp_date, 1)
+            self.disable_immediately(username_text)
         term_date = self.date_by_adding_business_days(tmp_date, 0).strftime('%m/%d/%Y')
         convert_to_shared_date = self.date_by_adding_business_days(tmp_date, 1).strftime("%m/%d/%Y")
         second_notification_date = self.date_by_adding_business_days(tmp_date, 20).strftime('%m/%d/%Y')
