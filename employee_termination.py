@@ -1,4 +1,5 @@
 import os, sys, logging, csv
+import pandas as pd
 
 from datetime import datetime, timedelta, time
 from PyQt6.QtCore import Qt, QCoreApplication, QDate
@@ -219,7 +220,11 @@ class MainWindow(QMainWindow):
 
         new_data = [(first_name + " " + last_name), first_name, username, manager, hr, term_date, second_notification_date, final_warning_date, deletion_date, convert_to_shared_date]
 
-        with open(term_list_csv, 'a', newline='') as file:
+        with open(term_list_csv, 'a') as file:
+            data_frame = pd.read_csv(term_list_csv)
+            data_frame = data_frame.dropna(axis=1, how='all')
+            data_frame = data_frame.dropna(axis=0, how='all')
+            data_frame.to_csv(term_list_csv, index=False)
             writer = csv.writer(file)
             writer.writerow(new_data)
 
