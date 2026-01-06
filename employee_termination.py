@@ -151,11 +151,11 @@ class MainWindow(QMainWindow):
         if (tmp_date == today and cutoff_date_time < current_date_time):
             tmp_date = self.date_by_adding_business_days(tmp_date, 1)
             self.disable_immediately(username_text)
-        term_date = self.date_by_adding_business_days(tmp_date, 0).strftime('%m/%d/%Y')
-        convert_to_shared_date = self.date_by_adding_business_days(tmp_date, 1).strftime("%m/%d/%Y")
-        second_notification_date = self.date_by_adding_business_days(tmp_date, 20).strftime('%m/%d/%Y')
-        deletion_date = self.date_by_adding_business_days(tmp_date, 30).strftime('%m/%d/%Y')
-        final_warning_date = self.date_by_adding_business_days(tmp_date, 29).strftime("%m/%d/%Y")
+        term_date = self.date_by_adding_business_days(tmp_date, 0).strftime('X%m/X%d/%Y').replace('X0','X').replace('X','')
+        convert_to_shared_date = self.date_by_adding_business_days(tmp_date, 1).strftime("X%m/X%d/%Y").replace('X0','X').replace('X','')
+        second_notification_date = self.date_by_adding_business_days(tmp_date, 20).strftime('X%m/X%d/%Y').replace('X0','X').replace('X','')
+        deletion_date = self.date_by_adding_business_days(tmp_date, 30).strftime('X%m/X%d/%Y').replace('X0','X').replace('X','')
+        final_warning_date = self.date_by_adding_business_days(tmp_date, 29).strftime("X%m/X%d/%Y").replace('X0','X').replace('X','')
 
         current_user = os.environ.get('USER') or os.environ.get('USERNAME')
         logging.info('The following information was submitted by ' + current_user + " to disable " + first_name_text + "'s account")
