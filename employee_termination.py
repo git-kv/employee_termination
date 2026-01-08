@@ -17,8 +17,8 @@ class MainWindow(QMainWindow):
         text_box_width = 200
         spacer_width = 240
         spacer_height = 15
-        calendar_width = 260
-        button_width = 260
+        calendar_width = 270
+        button_width = 270
 
         self.setWindowTitle("Employee Termination")
 
@@ -55,13 +55,14 @@ class MainWindow(QMainWindow):
         self.immediate_term_label = QLabel('Immediate Termination:')
         self.immediate_term_check_box = QCheckBox()
 
-        self.add_to_term_list_button = QPushButton('Begin Termination Process')
+        self.add_to_term_list_button = QPushButton('Add to Termination Process')
         self.add_to_term_list_button.setFixedWidth(button_width)
         self.add_to_term_list_button.setEnabled(False)
         self.add_to_term_list_button.clicked.connect(self.add_to_term_list)
 
         self.open_term_list_button = QPushButton('Open Term List')
         self.open_term_list_button.setFixedWidth(button_width)
+        self.open_term_list_button.clicked.connect(self.open_term_list)
         
         self.open_readme_button = QPushButton('Open ReadMe')
         self.open_readme_button.setFixedWidth(button_width)
@@ -264,6 +265,9 @@ class MainWindow(QMainWindow):
             readme_message_text = data.read()
         readme_message_box.setText(readme_message_text)
         readme_message_box.exec()
+
+    def open_term_list(self):
+        os.system("start EXCEL.EXE \\\\eocservices\\apps$\\programs\\scripts\\separation\\term_list.csv")
 app = QApplication(sys.argv)
 
 window = MainWindow()
